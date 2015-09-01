@@ -1,0 +1,13 @@
+select rn, board_no, board_title, board_writer, board_date, board_hitcount
+from
+(
+  select rownum rn, board_no, board_title, board_writer, board_date, board_hitcount
+  from
+  (
+    select board_no, board_title, board_writer, board_date, board_hitcount 
+    from boards
+    order by board_no desc
+  )
+  where rownum<=2*10
+)
+where rn>=(2-1)*10+1
